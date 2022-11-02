@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using LoginAndCRUDCoreProject.Models
+
+@inject SignInManager<User> SignInManager
+@{
+    var user = await SignInManager.UserManager.GetUserAsync(User);
+}
+<ul class="navbar-nav">
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item" style="align-self: center;">
+        @if (user?.ProfilePicture != null)
+        {
+            <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="data:image/*;base64,@(Convert.ToBase64String(user.ProfilePicture))"> 
+        }
+        else
+        {
+            @if (User.IsInRole("Admin"))
+            {
+                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="/img/AdminProfile.jpg">
+            }
+            else
+            {
+                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="/img/DefaultImage.png">
+            }
+        }
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @user.Name!</a>
+    </li>
+    <li class="nav-item">
+        <form class="form-inline" asp-controller="User" asp-action="Logout" method="post">
+            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a asp-controller="User" asp-action="Register" class="nav-link text-dark">Register</a>
+    </li>
+    <li class="nav-item">
+        <a asp-controller="User" asp-action="Login" class="nav-link text-dark">Login</a>
+    </li>
+}
+</ul>
