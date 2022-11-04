@@ -1,6 +1,8 @@
 ﻿
+using LoginAndCRUDCoreProject.DTO;
 using LoginAndCRUDCoreProject.Models;
 using LoginAndCRUDCoreProject.Repositories;
+using LoginAndCRUDCoreProject.ViewsModels;
 
 namespace LoginAndCRUDCoreProject.Services
 {
@@ -16,8 +18,12 @@ namespace LoginAndCRUDCoreProject.Services
         {
             return await _stuRepository.dbGetStudentsList();
         }
-        public bool doAddStudent(Student student)
+        public bool doAddStudent(StudentDto studentDto)
         {
+            Student student = new Student();
+            student.Name = studentDto.Name;
+            student.Email = studentDto.Email;
+            student.Address = studentDto.Address;  
             return _stuRepository.dbAddStudent(student);
         }
         public Student doGetStudentById(int id)
@@ -25,8 +31,12 @@ namespace LoginAndCRUDCoreProject.Services
             Student student = _stuRepository.dbGetStudentById(id);
             return student;
         }
-        public bool doUpdateStudent(Student student)
+        public bool doUpdateStudent(StudentDto studentDto)
         {
+            Student student = _stuRepository.dbGetStudentById(studentDto.StudentId);
+            student.Name = studentDto.Name;
+            student.Email = studentDto.Email;
+            student.Email = studentDto.Address;
             return _stuRepository.dbUpdateStudent(student);
         }
         public bool doDeleteStudent(Student student)

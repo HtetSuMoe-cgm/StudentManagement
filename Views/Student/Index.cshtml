@@ -21,7 +21,7 @@
                     @if (User.Identity.IsAuthenticated){
                         @if (User.IsInRole("Admin")){
                             <th>
-                                <a asp-action="AddOrEdit" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
+                                <a asp-action="CreateStudent" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
                             </th>
                         }
                     }
@@ -46,7 +46,7 @@
                               <td>
                                    <form asp-action="Delete" asp-route-id="@item.StudentId">
                                        <div class="btn btn-group btn-group-sm">
-                                            <a asp-action="AddOrEdit" asp-route-id="@item.StudentId" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>&nbsp;&nbsp;
+                                            <a asp-action="UpdateStudent" asp-route-id="@item.StudentId" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>&nbsp;&nbsp;
                                            <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('Are you sure want to delete this record?')">
                                                 <i class="fa-solid fa-trash-can"></i>

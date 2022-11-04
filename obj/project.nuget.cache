@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G4I631TKtZdiYmp9GZoaXEqh2Sbas35Pb+HkEk2AwFqRCy1MVmQQDzB4aFEuVvOAUvI79+ZlA3lh9p4b0EogQw==",
+  "dgSpecHash": "EfaWADFOoAkfBF2n7OvCUOLcKbhrN6UpiGVs17STp8oVvnx+3IQ33YV64V2TNAxIbb9wrvYEYCAki6eGlwISHg==",
   "success": true,
-  "projectFilePath": "D:\\MyProject\\LoginAndCRUDCoreProject\\LoginAndCRUDCoreProject.csproj",
+  "projectFilePath": "D:\\MyNetCoreProject\\StudentManagement\\LoginAndCRUDCoreProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HtetSuMoe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\HtetSuMoe\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.9\\microsoft.aspnetcore.cryptography.internal.6.0.9.nupkg.sha512",

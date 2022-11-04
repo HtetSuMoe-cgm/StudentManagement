@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MyProject\\LoginAndCRUDCoreProject\\LoginAndCRUDCoreProject.csproj": {}
+    "D:\\MyNetCoreProject\\StudentManagement\\LoginAndCRUDCoreProject.csproj": {}
   },
   "projects": {
-    "D:\\MyProject\\LoginAndCRUDCoreProject\\LoginAndCRUDCoreProject.csproj": {
+    "D:\\MyNetCoreProject\\StudentManagement\\LoginAndCRUDCoreProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProject\\LoginAndCRUDCoreProject\\LoginAndCRUDCoreProject.csproj",
+        "projectUniqueName": "D:\\MyNetCoreProject\\StudentManagement\\LoginAndCRUDCoreProject.csproj",
         "projectName": "LoginAndCRUDCoreProject",
-        "projectPath": "D:\\MyProject\\LoginAndCRUDCoreProject\\LoginAndCRUDCoreProject.csproj",
+        "projectPath": "D:\\MyNetCoreProject\\StudentManagement\\LoginAndCRUDCoreProject.csproj",
         "packagesPath": "C:\\Users\\HtetSuMoe\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProject\\LoginAndCRUDCoreProject\\obj\\",
+        "outputPath": "D:\\MyNetCoreProject\\StudentManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HtetSuMoe\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

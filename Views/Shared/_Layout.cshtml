@@ -26,7 +26,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>*@
-                        
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <div>
+                                        <a asp-controller="Course" asp-action="CourseList">Courses</a>
+                                        <div class="menu">
+                                            <a asp-controller="Course" asp-action="CreateCourse">Create Course</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

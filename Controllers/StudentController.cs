@@ -1,6 +1,8 @@
 ﻿using LoginAndCRUDCoreProject.Data;
+using LoginAndCRUDCoreProject.DTO;
 using LoginAndCRUDCoreProject.Models;
 using LoginAndCRUDCoreProject.Services;
+using LoginAndCRUDCoreProject.ViewsModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,36 +24,62 @@ namespace LoginAndCRUDCoreProject.Controllers
            return View(await _studentService.doGetStudentList());
         }
 
+        //[Authorize(Policy = "RequireAdministratorRole")]
+        //public IActionResult AddOrEdit(int id=0)
+        //{
+        //    if (id == 0)
+        //    {
+        //        return View(new Student());
+        //    }
+        //    else
+        //    {
+        //        return View(_studentService.doGetStudentById(id));
+        //    }
+        //}
+
         [Authorize(Policy = "RequireAdministratorRole")]
-        public IActionResult AddOrEdit(int id=0)
+        public async Task<IActionResult> CreateStudent()
         {
-            if (id == 0)
-            {
-                return View(new Student());
-            }
-            else
-            {
-                return View(_studentService.doGetStudentById(id));
-            }
+            return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddOrEdit(Student student)
+        public ActionResult CreateStudent(StudentVM studentVM)
         {
             if (ModelState.IsValid)
             {
-                if(student.StudentId == 0)
-                {
-                    _studentService.doAddStudent(student); 
-                }
-                else
-                {
-                    _studentService.doUpdateStudent(student);
-                }
+                StudentDto studentDto = new StudentDto();
+                studentDto.Name = studentVM.Name;
+                studentDto.Email = studentVM.Email;
+                studentDto.Address = studentVM.Address;
+                _studentService.doAddStudent(studentDto);
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View("CreateStudent", studentVM);
+        }
+
+        [Authorize(Policy = "RequireAdministratorRole")]
+        public ActionResult UpdateStudent(int id)
+        {
+            Student student = _studentService.doGetStudentById(id);
+            StudentDto studentDto = new StudentDto();
+            studentDto.StudentId = student.StudentId;
+            studentDto.Name = student.Name;
+            studentDto.Email = student.Email;
+            studentDto.Address = student.Address;
+            return View(studentDto);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStudent(int id, StudentDto studentDto)
+        {
+            if (ModelState.IsValid)
+            {
+                _studentService.doUpdateStudent(studentDto);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(studentDto);
         }
 
         [HttpPost, ActionName("Delete")]

@@ -1,0 +1,60 @@
+﻿
+@model IEnumerable<LoginAndCRUDCoreProject.DTO.CourseDto>
+@{
+    ViewData["Title"] = "CourseList";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Course List</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseName)
+                    </th>
+                    <th>
+                        <a asp-controller="Course" asp-action="CreateCourse" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
+                    </th>
+                    @*@if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th>
+                                <a asp-controller="Course" asp-action="AddOrEdit" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
+                            </th>
+                        }
+                    }*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CourseName)
+                        </td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <td>
+                                    <form asp-action="DeleteCourse" asp-route-id="@item.CourseId">
+                                        <div class="btn btn-group btn-group-sm">
+                                            <a asp-action="UpdateCourse" asp-route-id="@item.CourseId" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure want to delete this record?')">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
