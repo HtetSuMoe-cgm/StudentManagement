@@ -23,7 +23,8 @@ namespace LoginAndCRUDCoreProject.Services
             Student student = new Student();
             student.Name = studentDto.Name;
             student.Email = studentDto.Email;
-            student.Address = studentDto.Address;  
+            student.Address = studentDto.Address;
+            student.UserId = studentDto.UserId;
             return _stuRepository.dbAddStudent(student);
         }
         public Student doGetStudentById(int id)
@@ -36,7 +37,7 @@ namespace LoginAndCRUDCoreProject.Services
             Student student = _stuRepository.dbGetStudentById(studentDto.StudentId);
             student.Name = studentDto.Name;
             student.Email = studentDto.Email;
-            student.Email = studentDto.Address;
+            student.Address = studentDto.Address;
             return _stuRepository.dbUpdateStudent(student);
         }
         public bool doDeleteStudent(Student student)

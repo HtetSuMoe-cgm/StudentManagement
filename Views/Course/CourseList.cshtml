@@ -14,8 +14,14 @@
                         @Html.DisplayNameFor(model => model.CourseName)
                     </th>
                     <th>
-                        <a asp-controller="Course" asp-action="CreateCourse" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
+                        @Html.DisplayNameFor(model => model.Fees)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Duration)
+                    </th>
+                    @*<th>
+                        <a asp-controller="Course" asp-action="CreateCourse" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
+                    </th>*@
                     @*@if (User.Identity.IsAuthenticated)
                     {
                         @if (User.IsInRole("Admin"))
@@ -33,6 +39,12 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.CourseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fees)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Duration)
                         </td>
                         @if (User.Identity.IsAuthenticated)
                         {

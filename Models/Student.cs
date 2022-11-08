@@ -18,5 +18,7 @@ namespace LoginAndCRUDCoreProject.Models
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
         public ICollection<StudentCourse> StudentCourses { get; set; }
+        public string UserId { get; set; }
+        public User StudentUser { get; set; }  
     }
 }

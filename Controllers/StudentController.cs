@@ -4,6 +4,7 @@ using LoginAndCRUDCoreProject.Models;
 using LoginAndCRUDCoreProject.Services;
 using LoginAndCRUDCoreProject.ViewsModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +12,13 @@ namespace LoginAndCRUDCoreProject.Controllers
 {
     public class StudentController : Controller
     {
-
         private readonly IStudentService _studentService;
+        private readonly UserManager<User> _userManager;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(IStudentService studentService, UserManager<User> userManager)
         {
             _studentService = studentService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -37,7 +39,7 @@ namespace LoginAndCRUDCoreProject.Controllers
         //    }
         //}
 
-        [Authorize(Policy = "RequireAdministratorRole")]
+        //[Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> CreateStudent()
         {
             return View();
@@ -46,20 +48,24 @@ namespace LoginAndCRUDCoreProject.Controllers
         [HttpPost]
         public ActionResult CreateStudent(StudentVM studentVM)
         {
+            //private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+            var userId = _userManager.GetUserId(User);
             if (ModelState.IsValid)
             {
                 StudentDto studentDto = new StudentDto();
                 studentDto.Name = studentVM.Name;
                 studentDto.Email = studentVM.Email;
                 studentDto.Address = studentVM.Address;
+                studentDto.UserId = userId;
                 _studentService.doAddStudent(studentDto);
 
                 return RedirectToAction(nameof(Index));
+                //return View("/courseList");
             }
             return View("CreateStudent", studentVM);
         }
 
-        [Authorize(Policy = "RequireAdministratorRole")]
+        //[Authorize(Policy = "RequireAdministratorRole")]
         public ActionResult UpdateStudent(int id)
         {
             Student student = _studentService.doGetStudentById(id);

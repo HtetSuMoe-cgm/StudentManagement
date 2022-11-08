@@ -21,6 +21,8 @@ namespace LoginAndCRUDCoreProject.Services
                 var course = new CourseDto();
                 course.CourseId = item.CourseId;
                 course.CourseName = item.CourseName;
+                course.Fees = item.Fees;
+                course.Duration = item.Duration;
                 courseDtos.Add(course);
             }
             return (courseDtos);
@@ -29,6 +31,8 @@ namespace LoginAndCRUDCoreProject.Services
         {
             Course course = new Course();
             course.CourseName = courseDto.CourseName;
+            course.Fees = courseDto.Fees;
+            course.Duration = courseDto.Duration;
             return _courseRepository.dbAddCourse(course);
         }
         public Course doGetCourseById(int id)
@@ -39,6 +43,8 @@ namespace LoginAndCRUDCoreProject.Services
         {
             Course course = _courseRepository.dbGetCourseById(courseDto.CourseId);
             course.CourseName = courseDto.CourseName;
+            course.Fees = courseDto.Fees;
+            course.Duration = courseDto.Duration;
             return _courseRepository.dbUpdateCourse(course);
         }
         public bool doDeleteCourse(Course course)

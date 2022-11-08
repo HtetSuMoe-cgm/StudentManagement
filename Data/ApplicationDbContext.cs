@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace LoginAndCRUDCoreProject.Data
 {
@@ -19,6 +20,7 @@ namespace LoginAndCRUDCoreProject.Data
             {
                 entity.ToTable(name: "User");
             });
+
             builder.Entity<IdentityRole>(entity =>
             {
                 entity.ToTable(name: "Role");
@@ -43,6 +45,25 @@ namespace LoginAndCRUDCoreProject.Data
             {
                 entity.ToTable("UserTokens");
             });
+
+            builder.Entity<StudentCourse>()
+                .HasKey(sc => new { sc.StudentId, sc.CourseId });
+            builder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Student)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.StudentId);
+            builder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Course)
+                .WithMany(c => c.StudentCourses)
+                .HasForeignKey(sc => sc.CourseId);
+
+            builder.Entity<Student>()
+                .HasOne(b => b.StudentUser)
+                .WithOne(i => i.Student)
+                .HasForeignKey<Student>(b => b.UserId);
         }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<Student> Students { get; set; }
     }
 }

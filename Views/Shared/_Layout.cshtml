@@ -20,24 +20,50 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                       @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>*@
                         @if (User.Identity.IsAuthenticated)
                         {
                             @if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
-                                    <div>
+                                @*<li class="nav-item">
+                                    <div class="ui dropdown item">
                                         <a asp-controller="Course" asp-action="CourseList">Courses</a>
                                         <div class="menu">
                                             <a asp-controller="Course" asp-action="CreateCourse">Create Course</a>
                                         </div>
                                     </div>
+                                </li>*@
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Courses
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" asp-controller="Course" asp-action="CreateCourse">Create Course</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Course" asp-action="CourseList">Course List</a></li>
+                                        </ul>
+                                    </div>
                                 </li>
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Students
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" asp-controller="Student" asp-action="CreateStudent">Create Student</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Student" asp-action="Index">Student List</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                @*<li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dropdown
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>*@
                             }
                         }
                     </ul>

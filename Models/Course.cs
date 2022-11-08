@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LoginAndCRUDCoreProject.Models
 {
@@ -7,6 +9,10 @@ namespace LoginAndCRUDCoreProject.Models
         [Key]
         public int CourseId { get; set; }
         public string CourseName { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal Fees { get; set; }
+        public string Duration { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

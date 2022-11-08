@@ -7,5 +7,6 @@ namespace LoginAndCRUDCoreProject.Models
         public string Name { get; set; }
         public byte[]? ProfilePicture { get; set; }
         public DateTime CreatedAt { get; set; }
+        public Student Student { get; set; }
     }
 }

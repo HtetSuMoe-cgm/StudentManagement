@@ -1,17 +1,17 @@
 ﻿using LoginAndCRUDCoreProject.Data;
 using LoginAndCRUDCoreProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using LoginAndCRUDCoreProject.Migrations;
 
 namespace LoginAndCRUDCoreProject.Repositories
 {
     public class StudentRepository : IStudentRepository
     {
-        private readonly StudentdbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public StudentRepository(StudentdbContext context)
+        public StudentRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,9 @@ namespace LoginAndCRUDCoreProject.Repositories
         }
         public bool dbAddStudent(Student student)
         {
+            //var user = await GetCurrentUser();
             student.CreatedAt = DateTime.Now;
+            //student.UserId = ;
             _context.Add(student);
             return SaveStudent();
         }

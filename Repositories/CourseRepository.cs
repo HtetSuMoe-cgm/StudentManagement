@@ -6,9 +6,9 @@ namespace LoginAndCRUDCoreProject.Repositories
 {
     public class CourseRepository : ICourseRepository
     {
-        private readonly StudentdbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CourseRepository(StudentdbContext context)
+        public CourseRepository(ApplicationDbContext context)
         {
             _context = context;
         }

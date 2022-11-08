@@ -1,4 +1,6 @@
-﻿using LoginAndCRUDCoreProject.Models;
+﻿using LoginAndCRUDCoreProject.DTO;
+using LoginAndCRUDCoreProject.Models;
+using LoginAndCRUDCoreProject.Services;
 using LoginAndCRUDCoreProject.ViewsModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -15,12 +17,13 @@ namespace LoginAndCRUDCoreProject.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        //private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IStudentService _studentService;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IStudentService studentService)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._studentService = studentService;
         }
 
         [HttpGet("/login")]
@@ -38,7 +41,7 @@ namespace LoginAndCRUDCoreProject.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Student");
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Username or Password incorrect");
             }
@@ -86,6 +89,12 @@ namespace LoginAndCRUDCoreProject.Controllers
                     string rolname = "User";
                     await _userManager.AddToRoleAsync(user, rolname);
                     await _signInManager.SignInAsync(user, false);
+                    StudentDto student = new StudentDto();
+                    student.Name = registerForm.Name;
+                    student.Email = registerForm.Email;
+                    student.Address = registerForm.Address;
+                    student.UserId = await _userManager.GetUserIdAsync(user);
+                    _studentService.doAddStudent(student);
                     return RedirectToAction("Index", "Student");
                 }
                 foreach (IdentityError? error in result.Errors)
@@ -93,7 +102,7 @@ namespace LoginAndCRUDCoreProject.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return View(registerForm);
+            return View("UserRegister",registerForm);
         }
     
         [HttpGet]

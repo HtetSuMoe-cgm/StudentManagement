@@ -13,6 +13,8 @@ namespace LoginAndCRUDCoreProject.Controllers
         {
             _courseService = courseService;
         }
+
+        [HttpGet("/courseList")]
         public async Task<IActionResult> CourseList()
         {
             return View(await _courseService.doGetCourseList());
@@ -29,8 +31,9 @@ namespace LoginAndCRUDCoreProject.Controllers
             {
                 CourseDto courseDto = new CourseDto();
                 courseDto.CourseName = coursevm.CourseName;
+                courseDto.Fees = coursevm.Fees;
+                courseDto.Duration = coursevm.Duration;
                 _courseService.doAddCourse(courseDto);
-                
                 return RedirectToAction(nameof(CourseList));
             }
             return View("CourseCreate", coursevm);
@@ -41,7 +44,9 @@ namespace LoginAndCRUDCoreProject.Controllers
             Course course = _courseService.doGetCourseById(id);
             CourseDto courseDto = new CourseDto();
             courseDto.CourseId = course.CourseId;
-            courseDto.CourseName =course.CourseName;    
+            courseDto.CourseName =course.CourseName;
+            courseDto.Fees = course.Fees;
+            courseDto.Duration = course.Duration;
             return View(courseDto);
         }
 
